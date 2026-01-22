@@ -2,6 +2,18 @@ Mlops projects
 
 Notebook
 
+commands to use sqlite and sqlalchemy
+how to verify it:
+python
+
+import pandas as pd
+from db.database import engine
+
+pd.read_sql(
+    "SELECT name FROM sqlite_master WHERE type='table';",
+    engine
+)
+
 Orchestrate the pipeline with airflow
 Bronze layer - Data ingestion - Airflow/ Prefect
 	PostgreSQL
