@@ -3,6 +3,8 @@ Mlops projects
 Notebook
 
 commands to use sqlite and sqlalchemy
+python -m scripts.create_tables
+
 how to verify it:
 python
 
@@ -14,12 +16,48 @@ pd.read_sql(
     engine
 )
 
+from etl.common.db import engine
+from sqlalchemy import text
+
+with engine.begin() as conn:
+    conn.execute(text("DROP TABLE IF EXISTS gold_price_features;"))
+
+
 Orchestrate the pipeline with airflow
 Bronze layer - Data ingestion - Airflow/ Prefect
-	PostgreSQL
+	SQLLite
+python -m etl.bronze.ingest_prices
+
 Silver layer - Data Quality checks - Pander, Great Expectations
 Gold layer - Feature storing - Feast - using lags and other features
 
+AIRFLOW -DAG
+export AIRFLOW_VERSION=2.8.4
+export PYTHON_VERSION=$(python -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+export CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+export AIRFLOW_HOME=~/airflow
+rm -rf ~/airflow
+mkdir -p ~/airflow
+airflow db init
+airflow users create \
+  --username admin \
+  --password admin \
+  --firstname Admin \
+  --lastname User \
+  --role Admin \
+  --email admin@example.com
+mkdir -p ~/airflow/dags
+cp pipelines/dags/etl_bronze_silver_gold.py ~/airflow/dags/
+export PYTHONPATH=$(pwd)
+airflow webserver -p 8080
+airflow scheduler
+http://localhost:8080
+Login:
+username: admin
+password: admin
+
+probably add schema creation too safe creation
 API -> bronze -> store in table -> silver -> data quality checks using Pandera -> store -> gold -> feature engineering -> feast (data also here? )
 
 Orchestration Kubeflow
