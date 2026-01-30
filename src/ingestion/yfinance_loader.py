@@ -3,6 +3,11 @@ import pandas as pd
 from datetime import datetime
 from src.config.settings import RAW_DATA_DIR
 
+def flatten_yfinance_columns(df):
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+    return df
+
 
 def load_stock_data(
     ticker: str,
@@ -25,10 +30,12 @@ def load_stock_data(
     if df.empty:
         raise ValueError(f"No data fetched for ticker {ticker}")
 
+    df = flatten_yfinance_columns(df)   # ✅ CRITICAL LINE
+
     df.reset_index(inplace=True)
     df["ticker"] = ticker
     df["ingestion_timestamp"] = datetime.utcnow()
-
+    #print(df.head(2))
     return df
 
 
