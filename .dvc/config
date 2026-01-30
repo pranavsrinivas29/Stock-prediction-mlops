@@ -1,2 +1,4 @@
-['remote "origin"']
+[core]
+    remote = dagshub
+['remote "dagshub"']
     url = https://dagshub.com/pranav10srinivas/Stock-prediction-mlops.dvc
