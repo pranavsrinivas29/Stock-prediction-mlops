@@ -1,0 +1,6 @@
+outs:
+- md5: 073a2c7379f651dd3f175a631b634173.dir
+  size: 300795
+  nfiles: 1
+  hash: md5
+  path: stocks
