@@ -18,6 +18,11 @@ def load_stock_data(
     """
     Load raw OHLCV stock data from yfinance.
     """
+    if start is None:
+        start = "2015-01-01"
+    if end is None:
+        end = datetime.today().strftime("%Y-%m-%d")
+        
     df = yf.download(
         tickers=ticker,
         start=start,
@@ -29,8 +34,9 @@ def load_stock_data(
 
     if df.empty:
         raise ValueError(f"No data fetched for ticker {ticker}")
-
-    df = flatten_yfinance_columns(df)   # ✅ CRITICAL LINE
+    #print('1st check:', df.columns)
+    df = flatten_yfinance_columns(df) 
+    #print('2nd check:', df.columns)
 
     df.reset_index(inplace=True)
     df["ticker"] = ticker
