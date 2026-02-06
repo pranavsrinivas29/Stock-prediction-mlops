@@ -8,6 +8,8 @@ def run_for_ticker(ticker: str):
     feature_path = FEATURE_DATA_DIR / f"{ticker}_features.parquet"
 
     df_raw = pd.read_parquet(raw_path)
+    print('df_raw', df_raw)
+    print('df_raw_index', df_raw.index.name)
     df_features = build_feature_table(df_raw)
     df_features.to_parquet(feature_path)
 
