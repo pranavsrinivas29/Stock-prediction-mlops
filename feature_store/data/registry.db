@@ -1,0 +1,46 @@
+
+G
+'
+__dummy"
+__dummy_idJstock_prediction
+·áøË¨êÙ…·áøË¨êÙ…
+D
+$
+ticker"tickerJstock_prediction
+·áøËàõİ…·áøËàõİ…1"$6b0f0d2f-b2c4-4b17-b0af-87566a107630*·áøËğ„ó…2Ë
+ª
+stock_featuresstock_predictionticker"	
+Close"
+
+return"
+
+log_return"
+return_lag_1"
+Close_lag_1"
+return_lag_3"
+Close_lag_3"
+rolling_mean_2"
+rolling_std_2"
+rolling_mean_3"
+rolling_std_3"	
+sma_3"	
+ema_3"
+
+sma_10"
+
+ema_10"
+volume_change"
+volume_rolling_mean_10"
+day_of_week"
+week_of_year"	
+month"
+is_month_end:—DateZ#!../data/features/stocks/*.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢stock_features_source’·áøË ò‹~"·áøËğäÓ…@b
+
+ticker
+·áøËÀÊá…·áøËÀÊá…R¾
+»
+,feast.infra.online_stores.sqlite.SqliteTable"Š
+g/Users/pranavsrinivasvenkatesh/Projects/Stock Price Prediction MLOPS/feature_store/data/online_store.dbstock_prediction_stock_featuresbªDateZ#!../data/features/stocks/*.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢stock_features_sourceªstock_prediction’·áøË ò‹~"·áøËğäÓ…Š0
+
+stock_prediction
+·áøË¿ÿ~·áøË¿ÿ~
